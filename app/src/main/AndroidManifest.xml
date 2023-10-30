@@ -13,6 +13,14 @@
         android:theme="@style/Theme.OnlineExams"
         tools:targetApi="31">
         <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/Theme.OnlineExams" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

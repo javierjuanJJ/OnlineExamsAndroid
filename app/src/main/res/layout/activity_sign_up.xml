@@ -7,7 +7,7 @@
     android:background="@color/main"
     android:gravity="top|center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SignUpActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:layout_marginTop="30dp"
         android:textColor="@color/white"
-        android:text="@string/login"
+        android:text="Create new Account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,58 +31,98 @@
         android:gravity="top|center_horizontal"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/grey_editext"
+            android:hint="First name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="23dp" />
+
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/grey_editext"
+            android:hint="Last name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="23dp" />
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="23dp"
-            android:padding="10dp"
-            android:background="@drawable/grey_editext"
-            android:textColor="@color/black"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionNext"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="100dp"
-            android:hint="@string/email"/>
+            android:background="@drawable/grey_editext"
+            android:hint="@string/email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="23dp" />
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etPassword1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="23dp"
             android:padding="10dp"
             android:background="@drawable/grey_editext"
             android:textColor="@color/black"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"
             android:layout_marginBottom="15dp"
             android:hint="@string/password"/>
 
+        <EditText
+            android:id="@+id/etPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23dp"
+            android:padding="10dp"
+            android:background="@drawable/grey_editext"
+            android:textColor="@color/black"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:layout_marginBottom="15dp"
+            android:hint="Repeat the password"/>
+
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignUp"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_background"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/login"
+            android:text="@string/create_new_account"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
-        
+
         <TextView
-            android:id="@+id/tvSignUp"
+            android:id="@+id/tvLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20dp"
             android:padding="10dp"
+            android:text="@string/login"
             android:textColor="@color/main"
-            android:text="@string/create_new_account"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
