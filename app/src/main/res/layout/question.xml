@@ -21,6 +21,7 @@
         android:textStyle="bold"/>
 
     <RadioGroup
+        android:id="@+id/rgOptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -64,5 +65,18 @@
             android:layout_marginBottom="7dp"/>
 
     </RadioGroup>
+    
+    <TextView
+        android:id="@+id/tvCorrectAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/green_dark"
+        android:background="@drawable/grey_background"
+        android:text="Correct answer"
+        android:visibility="gone"/>
+
 
 </LinearLayout>

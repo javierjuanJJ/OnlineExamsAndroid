@@ -1,8 +1,5 @@
 package com.example.onlineexams;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +39,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void setUI() {
+
         database = FirebaseDatabase.getInstance().getReference();
         ProgressDialog progressDialog = new ProgressDialog(Home.this);
 
@@ -64,18 +65,21 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         etCreateQuizText = findViewById(R.id.etCreateQuizText);
         etStartQuizText = findViewById(R.id.etStartQuizText);
 
+
+
+
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DataSnapshot usersRef = snapshot.child("Users").child(userUID);
                 firstName = usersRef.child("First Name").getValue().toString();
-                if (usersRef.hasChild("Total Points")){
+                if (usersRef.hasChild("Total Points")) {
                     String totalPoints = usersRef.child("Total Points").getValue().toString();
-                    tvTotalPoints.setText(String.format("%s0d",totalPoints));
+                    tvTotalPoints.setText(String.format("%s0d", totalPoints));
                 }
-                if (usersRef.hasChild("Total Questions")){
+                if (usersRef.hasChild("Total Questions")) {
                     String totalQuestions = usersRef.child("Total Questions").getValue().toString();
-                    tvTotalQuestions.setText(String.format("%s0d",totalQuestions));
+                    tvTotalQuestions.setText(String.format("%s0d", totalQuestions));
                 }
 
                 tvName.setText(getString(R.string.welcome_s, firstName));
@@ -90,16 +94,41 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         database.addListenerForSingleValueEvent(listener);
 
         ivSignOut.setOnClickListener(this);
+        btnCreateQuiz.setOnClickListener(this);
+        btnStartQuiz.setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ivSignOut:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(Home.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+                break;
+            case R.id.btnCreateQuiz:
+                String quizTitle = etCreateQuizText.getText().toString();
+                if (!quizTitle.isEmpty()){
+                    etCreateQuizText.setError("Quiz title can not empty");
+                }
+                Intent intent1 = new Intent(Home.this, ExamEditorActivity.class);
+                intent1.putExtra("Quiz title", quizTitle);
+                etCreateQuizText.setText("");
+                startActivity(intent1);
+                break;
+
+            case R.id.btnStartQuiz:
+                String quizStart = etStartQuizText.getText().toString();
+                if (!quizStart.isEmpty()){
+                    etStartQuizText.setError("Quiz title can not empty");
+                }
+                Intent intent2 = new Intent(Home.this, ExamEditorActivity.class);
+                intent2.putExtra("Quiz ID", quizStart);
+                etStartQuizText.setText("");
+                startActivity(intent2);
                 break;
         }
     }
