@@ -65,7 +65,7 @@ public class ExamEditorActivity extends AppCompatActivity implements View.OnClic
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child("Quizzes").hasChild("Last ID")){
                     String lID = snapshot.child("Quizzes").child("Last ID").getValue().toString();
-                    quizId = Integer.parseInt(lID);
+                    quizId = Integer.parseInt(lID) + 1;
                 }
                 else {
                     quizId = 100000;
@@ -117,7 +117,7 @@ public class ExamEditorActivity extends AppCompatActivity implements View.OnClic
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("Quiz Id", String.valueOf(quizId));
                 clipboardManager.setPrimaryClip(clip);
-                Toast.makeText(this, "Your quiz id: " + quizID + " copied to clipboard", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Your quiz id: " + quizId + " copied to clipboard", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

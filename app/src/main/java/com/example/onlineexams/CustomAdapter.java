@@ -45,8 +45,9 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
       this.holder = holder;
       this.position = position;
       Question question = listAnswers.get(position);
+      holder.bind(question,listAnswers, position);
 
-      holder.getEtNewExam().setText(question.getQuestion());
+      /*holder.getEtNewExam().setText(question.getQuestion());
 
       EditText[] listEtEditExams = holder.getListEtEditExams();
       String[] options = question.getOptions();
@@ -153,7 +154,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
       if (position == listAnswers.size() - 1){
          holder.getEtNewExam().setVisibility(View.VISIBLE);
          holder.getEtNewExam().setOnClickListener(this);
-      }
+      }*/
 
    }
 
@@ -164,32 +165,34 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
 
    @Override
    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-      Question question = listAnswers.get(position);
+      /*Question question = listAnswers.get(position);
       RadioButton[] listRbEditExams = holder.getListRbEditExams();
       for (int counter = 0; counter < listRbEditExams.length; counter++) {
          if (listRbEditExams[counter].isChecked()){
             question.setCorrectAnswer(counter + 1);
          }
-      }
+      }*/
    }
 
    @Override
    public void onClick(View view) {
-      switch (view.getId()){
+      /*switch (view.getId()){
          case R.id.etNewExam:
             listAnswers.add(new Question());
             notifyDataSetChanged();
             break;
-      }
+      }*/
    }
 
-   public static class ViewHolder extends RecyclerView.ViewHolder {
+   public class ViewHolder extends RecyclerView.ViewHolder implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
       private RadioGroup rgEditExam;
       private RadioButton rbEditExamOption1,rbEditExamOption2,rbEditExamOption3,rbEditExamOption4;
       private EditText etEditExamOption1,etEditExamOption2,etEditExamOption3,etEditExamOption4,etNewExam;
-      private RadioButton[] listRbEditExams ={rbEditExamOption1,rbEditExamOption2,rbEditExamOption3,rbEditExamOption4};
-      
+      private Question question;
+      private ArrayList<Question> listAnswers;
+      private int position;
+
       public ViewHolder(@NonNull View itemView) {
          super(itemView);
          setUI(itemView);
@@ -260,7 +263,142 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
       }
 
       public RadioButton[] getListRbEditExams() {
-         return listRbEditExams;
+         return new RadioButton[]{rbEditExamOption1, rbEditExamOption2, rbEditExamOption3, rbEditExamOption4};
+      }
+
+      public void bind(Question question, ArrayList<Question> listAnswers, int position) {
+         getEtNewExam().setText(question.getQuestion());
+         this.question = question;
+         this.listAnswers = listAnswers;
+         this.position = position;
+
+         EditText[] listEtEditExams = getListEtEditExams();
+         String[] options = question.getOptions();
+         for (int counter = 0; counter < options.length; counter++) {
+            Log.i("tasksaaaa+", String.valueOf(listEtEditExams[counter]==null));
+            Log.i("tasksaaaa+", String.valueOf(counter));
+            listEtEditExams[counter].setText(options[counter]);
+
+         }
+         int selectedAnswer = question.getCorrectAnswer();
+
+         RadioButton[] listRbEditExams = getListRbEditExams();
+         listRbEditExams[selectedAnswer].setChecked(true);
+
+         getEtNewExam().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+               listAnswers.get(position).setQuestion(editable.toString());
+            }
+         });
+
+
+         getEtEditExamOption2().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+               listAnswers.get(position).setOption2(editable.toString());
+            }
+         });
+
+         getEtEditExamOption3().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+               listAnswers.get(position).setOption3(editable.toString());
+            }
+         });
+
+         getEtEditExamOption4().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+               listAnswers.get(position).setOption4(editable.toString());
+            }
+         });
+
+         getEtEditExamOption1().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+               listAnswers.get(position).setOption1(editable.toString());
+            }
+         });
+
+         getRgEditExam().setOnCheckedChangeListener(this);
+
+
+         if (position == listAnswers.size() - 1){
+            getEtNewExam().setVisibility(View.VISIBLE);
+            getEtNewExam().setOnClickListener(this);
+         }
+      }
+
+      @Override
+      public void onCheckedChanged(RadioGroup radioGroup, int i) {
+         Question question = this.question;
+         RadioButton[] listRbEditExams = getListRbEditExams();
+         for (int counter = 0; counter < listRbEditExams.length; counter++) {
+            if (listRbEditExams[counter].isChecked()){
+               question.setCorrectAnswer(counter + 1);
+            }
+         }
+      }
+
+      @Override
+      public void onClick(View view) {
+         switch (view.getId()){
+            case R.id.etNewExam:
+               listAnswers.add(new Question());
+               // notifyDataSetChanged();
+               break;
+         }
       }
    }
 }

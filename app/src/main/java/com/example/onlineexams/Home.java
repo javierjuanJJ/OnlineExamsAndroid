@@ -113,18 +113,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btnCreateQuiz:
                 String quizTitle = etCreateQuizText.getText().toString();
-                if (!quizTitle.isEmpty()){
+                if (quizTitle.isEmpty()){
                     etCreateQuizText.setError("Quiz title can not empty");
                 }
                 Intent intent1 = new Intent(Home.this, ExamEditorActivity.class);
-                intent1.putExtra("Quiz title", quizTitle);
+                intent1.putExtra("Quiz Title", quizTitle);
                 etCreateQuizText.setText("");
                 startActivity(intent1);
                 break;
 
             case R.id.btnStartQuiz:
                 String quizStart = etStartQuizText.getText().toString();
-                if (!quizStart.isEmpty()){
+                if (quizStart.isEmpty()){
                     etStartQuizText.setError("Quiz title can not empty");
                 }
                 Intent intent2 = new Intent(Home.this, ExamEditorActivity.class);
