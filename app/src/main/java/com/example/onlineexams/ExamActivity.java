@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ExamActivity extends AppCompatActivity {
+public class ExamActivity extends AppCompatActivity implements View.OnClickListener {
     private Question[] date;
 
     private ListView rv2;
@@ -40,6 +40,7 @@ public class ExamActivity extends AppCompatActivity {
     private String uid;
     private int oldTotalPoints = 0, newTotalPoints = 0;
     private String quizId;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class ExamActivity extends AppCompatActivity {
         rv2 = findViewById(R.id.rv2);
         tvTitle = findViewById(R.id.tvTitle);
         llBottom = findViewById(R.id.llBottom);
-
+        btnSubmit = findViewById(R.id.btnSubmit);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         database = FirebaseDatabase.getInstance().getReference();
@@ -101,6 +102,38 @@ public class ExamActivity extends AppCompatActivity {
 
 
         database.addValueEventListener(listener);
+        btnSubmit.setOnClickListener(this);
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnSubmit:
+                DatabaseReference ref = database.child("Quizzes").child(quizId).child("Answers").child(uid);
+                int totalPoints = oldTotalPoints;
+                int paints = 0;
+                for (int i = 0; i < date.length; i++) {
+                    ref.child(String.valueOf(i+1)).setValue(date[i].getSelectedAnswer());
+                    if(date[i].getSelectedAnswer() == date[i].getCorrectAnswer()){
+                        totalPoints++;
+                        paints++;
+                    }
+                }
+                ref.child("Points").setValue(paints);
+                int totalQuestions = newTotalPoints + date.length;
+                database.child("Users").child(uid).child("Total Points").setValue(totalPoints);
+                database.child("Users").child(uid).child("Total Questions").setValue(totalQuestions);
+                database.child("Users").child(uid).child("Quizzes solved").setValue("");
+
+                Intent i = new Intent(ExamActivity.this, ResultActivity.class);
+                i.putExtra("Quiz ID", quizId);
+                startActivity(i);
+                finish();
+
+
+
+                break;
+        }
     }
 }

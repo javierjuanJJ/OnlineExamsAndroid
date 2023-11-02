@@ -26,7 +26,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference database;
 
     private ImageView ivSignOut;
-    private TextView tvName, tvTotalQuestions, tvTotalPoints;
+    private TextView tvName, tvTotalQuestions, tvTotalPoints,tvQuiz;
     private Button btnStartQuiz, btnCreateQuiz;
     private EditText etCreateQuizText, etStartQuizText;
     private RelativeLayout rlSolvedQuiz, rlYourQuizzes;
@@ -58,6 +58,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         tvName = findViewById(R.id.tvName);
         tvTotalQuestions = findViewById(R.id.tvTotalQuestions);
         tvTotalPoints = findViewById(R.id.tvTotalPoints);
+        tvQuiz = findViewById(R.id.tvQuiz);
 
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
         btnCreateQuiz = findViewById(R.id.btnCreateQuiz);
@@ -97,7 +98,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         btnCreateQuiz.setOnClickListener(this);
         btnStartQuiz.setOnClickListener(this);
 
+        rlYourQuizzes.setOnClickListener(this);
 
+        tvQuiz.setOnClickListener(this);
     }
 
     @Override
@@ -129,6 +132,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 intent2.putExtra("Quiz ID", quizStart);
                 etStartQuizText.setText("");
                 startActivity(intent2);
+                break;
+            case R.id.rlSolvedQuiz:
+                Intent intent3 = new Intent(Home.this, ListQuizzesActivity.class);
+                intent3.putExtra("Operation", "List Solved Quizzes");
+                startActivity(intent3);
+
+                break;
+            case R.id.tvQuiz:
+                Intent intent4 = new Intent(Home.this, ResultActivity.class);
+                intent4.putExtra("Operation", "List Created Quizzes");
+                startActivity(intent4);
+
                 break;
         }
     }

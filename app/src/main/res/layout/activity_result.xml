@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main"
+    android:gravity="top|center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ResultActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/exam"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:gravity="top|center_horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/llBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="10dp">
+
+            <ListView
+                android:id="@+id/rv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="60dp"
+                android:divider="@color/transparent"
+                android:dividerHeight="20dp"
+                />
+
+            <TextView
+                android:id="@+id/tvTotalPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="@color/main"
+                android:text="Total 20/20"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
