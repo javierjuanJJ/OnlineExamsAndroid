@@ -4,7 +4,7 @@ public class Question {
    private String question, option1, option2, option3, option4;
    private int correctAnswer, selectedAnswer;
 
-   private String[] options = {option1, option2, option3, option4};
+   private final String[] options = {option1, option2, option3, option4};
 
    public String[] getOptions() {
       return options;

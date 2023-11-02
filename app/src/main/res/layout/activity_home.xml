@@ -19,11 +19,11 @@
             android:id="@+id/ivSignOut"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src=""
             android:scaleType="centerInside"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/tvName"
@@ -130,10 +130,10 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:src=""
                     android:scaleType="centerInside"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -290,10 +290,10 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:src=""
                     android:scaleType="centerInside"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:layout_width="match_parent"

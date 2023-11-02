@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tvLogin:
-                Intent i = new Intent(this, SignUpActivity.class);
+                Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 finish();
                 break;

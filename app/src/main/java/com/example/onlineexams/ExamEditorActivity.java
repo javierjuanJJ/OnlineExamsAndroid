@@ -85,7 +85,7 @@ public class ExamEditorActivity extends AppCompatActivity implements View.OnClic
         listQuestions = new ArrayList<>();
         listQuestions.add(new Question());
 
-        rv.setAdapter(new CustomAdapter(listQuestions));
+        rv.setAdapter(new CustomAdapter(listQuestions,getApplicationContext()));
         btnSubmit.setOnClickListener(this);
         quizTitle = getIntent().getExtras().getString("Quiz Title", "");
         /*quizIdString = getIntent().getExtras().getString("Quiz ID", "");*/

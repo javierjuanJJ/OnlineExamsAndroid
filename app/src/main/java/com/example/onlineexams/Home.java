@@ -58,7 +58,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         tvName = findViewById(R.id.tvName);
         tvTotalQuestions = findViewById(R.id.tvTotalQuestions);
         tvTotalPoints = findViewById(R.id.tvTotalPoints);
-        tvQuiz = findViewById(R.id.tvQuiz);
+        // tvQuiz = findViewById(R.id.tvQuiz);
 
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
         btnCreateQuiz = findViewById(R.id.btnCreateQuiz);
@@ -100,7 +100,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
         rlYourQuizzes.setOnClickListener(this);
 
-        tvQuiz.setOnClickListener(this);
     }
 
     @Override
@@ -139,12 +138,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent3);
 
                 break;
-            case R.id.tvQuiz:
+            /*case R.id.qu:
                 Intent intent4 = new Intent(Home.this, ResultActivity.class);
                 intent4.putExtra("Operation", "List Created Quizzes");
                 startActivity(intent4);
 
-                break;
+                break;*/
         }
     }
 }

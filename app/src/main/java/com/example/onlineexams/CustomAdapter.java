@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,12 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
 
    private ArrayList<Question> listAnswers;
    private ViewHolder holder;
+   private Context context;
    private int position;
 
-   public CustomAdapter(ArrayList<Question> listAnswers) {
+   public CustomAdapter(ArrayList<Question> listAnswers, Context context) {
       this.listAnswers = listAnswers;
+      this.context = context;
    }
 
    @NonNull
@@ -32,13 +35,13 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
    public CustomAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
       LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
       View inflate = layoutInflater.inflate(R.layout.question_edit, parent, false);
-
-      return new ViewHolder(inflate);
+      ViewHolder viewHolder = new ViewHolder(inflate);
+      return viewHolder;
    }
 
    @Override
    public void onBindViewHolder(@NonNull CustomAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-      holder.setIsRecyclable(false);
+      // holder.setIsRecyclable(false);
       this.holder = holder;
       this.position = position;
       Question question = listAnswers.get(position);
@@ -47,9 +50,11 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
 
       EditText[] listEtEditExams = holder.getListEtEditExams();
       String[] options = question.getOptions();
-
       for (int counter = 0; counter < options.length; counter++) {
+         Log.i("tasksaaaa+", String.valueOf(listEtEditExams[counter]==null));
+         Log.i("tasksaaaa+", String.valueOf(counter));
          listEtEditExams[counter].setText(options[counter]);
+
       }
       int selectedAnswer = question.getCorrectAnswer();
 
@@ -183,7 +188,6 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
       private RadioGroup rgEditExam;
       private RadioButton rbEditExamOption1,rbEditExamOption2,rbEditExamOption3,rbEditExamOption4;
       private EditText etEditExamOption1,etEditExamOption2,etEditExamOption3,etEditExamOption4,etNewExam;
-      private EditText[] listEtEditExams = {etEditExamOption1,etEditExamOption2,etEditExamOption3,etEditExamOption4};
       private RadioButton[] listRbEditExams ={rbEditExamOption1,rbEditExamOption2,rbEditExamOption3,rbEditExamOption4};
       
       public ViewHolder(@NonNull View itemView) {
@@ -192,15 +196,16 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
       }
 
       private void setUI(View itemView) {
-
+         Log.i("tasksaaaa","is starting");
          rgEditExam = itemView.findViewById(R.id.rgEditExam);
-
          rbEditExamOption1 = itemView.findViewById(R.id.rbEditExamOption1);
          rbEditExamOption2 = itemView.findViewById(R.id.rbEditExamOption2);
          rbEditExamOption3 = itemView.findViewById(R.id.rbEditExamOption3);
          rbEditExamOption4 = itemView.findViewById(R.id.rbEditExamOption4);
 
          etEditExamOption1 = itemView.findViewById(R.id.etEditExamOption1);
+         Log.i("tasksaaaa", String.valueOf(etEditExamOption1==null));
+
          etEditExamOption2 = itemView.findViewById(R.id.etEditExamOption2);
          etEditExamOption3 = itemView.findViewById(R.id.etEditExamOption3);
          etEditExamOption4 = itemView.findViewById(R.id.etEditExamOption4);
@@ -251,7 +256,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> imple
       }
 
       public EditText[] getListEtEditExams() {
-         return listEtEditExams;
+         return new EditText[]{etEditExamOption1, etEditExamOption2, etEditExamOption3, etEditExamOption4};
       }
 
       public RadioButton[] getListRbEditExams() {
